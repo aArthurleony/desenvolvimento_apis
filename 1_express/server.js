@@ -1,78 +1,94 @@
-/*import express from "express"*/
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
 
 const PORT = 3333;
-
 const app = express();
 
-//Aceitar JSON
-app.use(express.json())
+// Middleware para aceitar JSON
+app.use(express.json());
 
-//rotas
-/** Resquest HTTP
- * query params - ...:3333/pessoas?nome="Carlos"&idade=32
- *  Rotas do tipo GET (filtros e buscas)
- * route params - ...:3333/pessoas/5
- *  Rotas do tipo GET, PUT, PATCH, DELETE(listar um elemento)
- * body params - ...:3333/pessoas
- *  Rotas do tipo POST (Cadastro de informações)
-*/
+// Middleware para log de rotas
+const logRoutes = (request, response, next) => {
+  const { url, method } = request;
+  const rota = `[${method.toUpperCase()}] ${url}`;
+  console.log(rota);
+  next();
+};
+app.use(logRoutes);
 
-/*Query Params */
+// Array para armazenar os usuários (simulando um banco de dados)
+const users = [];
+
+// Rota para listar todos os usuários
 app.get("/users", (request, response) => {
-  // const query = request.query
-  // console.log(query)
-  const {nome, idade} = request.query
-  console.log(nome, idade)
-  response.status(200).json([
-    "Pessoa 1",
-    "Pessoa 2",
-    "Pessoa 3"
-  ]);
+  response.status(200).json(users);
 });
 
+// Rota para cadastrar um novo usuário
 app.post("/users", (request, response) => {
-  // const body = request.body
-  // console.log(body)
-  const {nome, idade} = request.body
-  console.log(nome, idade)
-  response.status(201).json([
-    "Pessoa 1",
-    "Pessoa 2",
-    "Pessoa 3",
-    "Pessoa 4"
-  ]);
+  const { nome, idade } = request.body;
+
+  // Validações básicas
+  if (!nome || !idade) {
+    return response
+      .status(400)
+      .json({ message: "Nome e idade são obrigatórios." });
+  }
+
+  const user = {
+    id: uuidv4(),
+    nome,
+    idade,
+  };
+
+  users.push(user);
+  response.status(201).json({ message: "Usuário cadastrado", user });
 });
 
-app.put("/users/:id/:cpf", (request, response) => {
-  // const params = request.params.id
-  // console.log(params)
-  // const id = request.params.id
-  // const cpf = request.params.cpf
-  const {id, cpf} = request.params
-  console.log(id,cpf)
-  response.status(200).json([
-    "Pessoa 10",
-    "Pessoa 2",
-    "Pessoa 3",
-    "Pessoa 4"
-  ]);
+// Rota para atualizar um usuário pelo ID
+app.put("/users/:id", (request, response) => {
+  const { id } = request.params;
+  const { nome, idade } = request.body;
+
+  const indexUser = users.findIndex((user) => user.id === id);
+  if (indexUser === -1) {
+    return response.status(404).json({ message: "Usuário não encontrado" });
+  }
+
+  if (!nome || !idade) {
+    return response
+      .status(400)
+      .json({ message: "Nome e idade são obrigatórios" });
+  }
+
+  users[indexUser] = {
+    id,
+    nome,
+    idade,
+  };
+
+  response
+    .status(200)
+    .json({ message: "Usuário atualizado", user: users[indexUser] });
 });
 
-app.patch("/users", (request, response) => {
-  response.status(200).json({ msg: "PATCH" });
+// Rota para atualizar parcialmente um usuário pelo ID
+app.patch("/users/:id", (request, response) => {});
+
+// Rota para deletar um usuário pelo ID
+app.delete("/users/:id", (request, response) => {
+  const { id } = request.params;
+
+  const indexUser = users.findIndex((user) => user.id === id);
+  if (indexUser === -1) {
+    return response.status(404).json({ message: "Usuário não encontrado" });
+  }
+
+  users.splice(indexUser, 1);
+  response.status(204).send("Usuário deletado");
 });
 
-app.delete("/users", (request, response) => {
-  response.status(204).json([
-    "Pessoa 10",
-    "Pessoa 2",
-    "Pessoa 3",
-    "Pessoa 4",
-    "Pessoa 5"
-  ]);
-});
-
+// Inicia o servidor na porta especificada
 app.listen(PORT, () => {
-  console.log("Servidor aberto na porta" + PORT);
+  console.log(`Servidor aberto na porta ${PORT}`);
 });
