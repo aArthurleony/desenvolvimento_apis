@@ -68,7 +68,8 @@ app.delete("/users", (request, response) => {
     "Pessoa 10",
     "Pessoa 2",
     "Pessoa 3",
-    "Pessoa 4"
+    "Pessoa 4",
+    "Pessoa 5"
   ]);
 });
 
