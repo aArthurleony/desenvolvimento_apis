@@ -1,11 +1,11 @@
 {
-  "name": "2_livraria",
+  "name": "2_2_livrariamvc",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev":"nodemon ./correcaoatividade.js",
+    "dev": "nodemon ./src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,7 +14,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mysql2": "^3.10.2",
+    "mysql2": "^3.10.3",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
