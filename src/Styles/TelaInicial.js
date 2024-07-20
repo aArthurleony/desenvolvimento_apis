@@ -17,11 +17,11 @@ export const Titulo = styled.h1`
   font-size: 50px;
   color: #333;
   margin-bottom: 20px;
-  font-family: "Poppins", sans-serif; /* Aplicedededeeydeudija a fonte Poppins */
+  font-family: "Poppins", sans-serif; 
 
   @media (max-width: 430px) and (max-height: 932px) {
     font-size: 1.5rem;
-    color: darkblue;
+    color: black;
   }
 `;
 
@@ -30,39 +30,22 @@ export const Subtitulo = styled.h2`
   color: #333;
   margin-top: -5%;
   margin-bottom: 20%;
-  font-family: @media (max-width: 430px) and (max-height: 932px) {
+  font-family: 'poppins';
+  @media (max-width: 430px) and (max-height: 932px) {
     font-size: 1.25rem;
-    color: darkblue;
+    color: black;
   }
 `;
 
 export const Logo = styled.img`
-  width: 250px; /* Ajuste o tamanho conforme necessário */
+  width: 250px; 
   height: 250px;
 `;
 
-export const BotaoCadastro = styled.button`
-  background-color: #2b439c;
-  width: ${(props) => props.width || "300px"};
-  height: ${(props) => props.height || "60px"};
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 30px;
-  cursor: pointer;
-  margin: 10px;
-  border-radius: 5px;
-  font-family: "Poppins", sans-serif; /* Aplica a fonte Poppins */
-
-  @media (max-width: 430px) and (max-height: 932px) {
-    padding: auto;
-    font-size: 20px;
-  }
-`;
-
-export const BotaoLogin = styled.button`
-  background-color: white;
-  color: black;
+export const GlobalButton = styled.button`
+  background-color: ${(props) => props.color || "#ffffff"};;
+  color: ${(props) => props.color || "#000000"};
+  border-radius: ${(props) => props.borderRadius || "7px"};
   border: 2px solid #ccc;
   padding: 10px 20px;
   width: ${(props) => props.width || "300px"};
@@ -70,12 +53,17 @@ export const BotaoLogin = styled.button`
   font-size: 30px;
   cursor: pointer;
   margin: 10px;
-  border-radius: 5px;
+
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  &:hover{
+      color: white;
+      background-color: darkblue;
+    }
 
   @media (max-width: 430px) and (max-height: 932px) {
     padding: auto;
     font-size: 20px;
+   
   }
 `;
 export const PageWrapper = styled.div`

@@ -1,10 +1,10 @@
 import React from "react";
-import { BotaoCadastro, BotaoLogin } from "../Styles/TelaInicial";
+import { GlobalButton } from "../Styles/TelaInicial";
 
 export const BotaoCadastrar = () => {
-  return <BotaoCadastro>CADASTRAR</BotaoCadastro>;
+  return <GlobalButton>CADASTRAR</GlobalButton>;
 };
 
 export const BotaoEntrar = () => {
-  return <BotaoLogin>ENTRAR</BotaoLogin>;
+  return <GlobalButton>ENTRAR</GlobalButton>;
 };
