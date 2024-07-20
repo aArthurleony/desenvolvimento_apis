@@ -1,10 +1,12 @@
 import React from "react";
+import { ContainerPaginaInicial, Titulo } from "../Styles/TelaInicial";
+import { BotaoCadastrar, BotaoEntrar } from "../Components/Botoes";
 
 const Home = () => {
   return (
-    <>
-      <h1>Bem vindo a página home</h1>
-    </>
+    <ContainerPaginaInicial>
+      <Titulo>Bem-vindo à Página Inicial</Titulo>
+    </ContainerPaginaInicial>
   );
 };
 
