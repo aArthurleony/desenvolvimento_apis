@@ -1,17 +1,19 @@
 
 import React from 'react';
+import { InputContainer, ErrorMessage } from '../Styles/InputLabel';
 
-const InputWithLabel = ({ label, name, type, placeholder, register }) => {
+const InputWithLabel = ({ label, name, type, placeholder, register, error }) => {
     return (
-        <div>
+        <InputContainer>
             <label htmlFor={name}>{label}</label>
             <input
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                {...register(name, { required: true })}
+                {...register(name)}
             />
-        </div>
+            {error && <ErrorMessage>{error.message}</ErrorMessage>}
+        </InputContainer>
     );
 };
 
