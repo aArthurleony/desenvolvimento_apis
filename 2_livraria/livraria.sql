@@ -13,3 +13,5 @@ CREATE TABLE funcionario(
 );
 
 ALTER TABLE funcionario ADD COLUMN cargo varchar(255) not null;
+
+USE LIVRARIAMVC
